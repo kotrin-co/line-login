@@ -12,20 +12,27 @@
   },
   "dependencies": {
     "ejs": "^2.5.6",
-    "express": "^4.15.2",
-    "request": "^2.88.0"
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "querystring": "^0.2.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noboru-i/line-note"
+    "url": "git+https://github.com/noboru-i/line-note.git"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noboru-i/line-note/issues"
+  },
+  "homepage": "https://github.com/noboru-i/line-note#readme",
+  "author": ""
 }

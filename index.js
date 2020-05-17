@@ -15,7 +15,7 @@ express()
     const query = querystring.stringify({
       response_type: 'code',
       client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
-      redirect_uri: 'https://line-note.herokuapp.com/callback',
+      redirect_uri: 'https://line-note2.herokuapp.com/callback',
       state: 'hoge', // TODO: must generate random string
       scope: 'profile',
     })
@@ -28,7 +28,7 @@ express()
         form: {
           grant_type: "authorization_code",
           code: req.query.code,
-          redirect_uri: 'https://line-note.herokuapp.com/callback',
+          redirect_uri: 'https://line-note2.herokuapp.com/callback',
           client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
           client_secret: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELSECRET,
         }
