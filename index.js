@@ -48,7 +48,7 @@ express()
               res.send(error)
               return
             }
-            res.send(body)
+            res.render('pages/index')
           })
       })
   })
