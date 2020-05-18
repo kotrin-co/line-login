@@ -5,6 +5,20 @@ const PORT = process.env.PORT || 5000
 const querystring = require('querystring')
 const request = require('request')
 
+var onetime_state_code;
+
+const state_code = () => {
+  const l = 8;
+  const c = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const cl = c.length;
+  let r = '';
+  for(let i=0;i<l;i++){
+    r += c[Math.floor(Math.random()*cl)];
+  }
+  console.log('state_code:',r);
+  return r;
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .disable('etag')
@@ -12,16 +26,20 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/login', (req, res) => {
+    onetime_state_code = state_code();
     const query = querystring.stringify({
       response_type: 'code',
       client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
       redirect_uri: 'https://line-note2.herokuapp.com/callback',
-      state: 'hoge', // TODO: must generate random string
+      state: onetime_state_code, // TODO: must generate random string
       scope: 'profile',
     })
     res.redirect(301, 'https://access.line.me/oauth2/v2.1/authorize?' + query)
   })
   .get('/callback', (req, res) => {
+    const callback_state_code = req.query.state;
+    console.log('ワンタイムステート：',onetime_state_code);
+    console.log('コールバックステート：',callback_state_code);
     request
       .post({
         url: `https://api.line.me/oauth2/v2.1/token`,
