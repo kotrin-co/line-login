@@ -38,38 +38,38 @@ express()
   })
   .get('/callback', (req, res) => {
     console.log('req.query:',req.query);
-    res.send('code:'+req.query.code);
+    // res.send('code:'+req.query.code);
     // const callback_state_code = req.query.state;
     // console.log('ワンタイムステート：',onetime_state_code);
     // console.log('コールバックステート：',callback_state_code);
-    // request
-    //   .post({
-    //     url: `https://api.line.me/oauth2/v2.1/token`,
-    //     form: {
-    //       grant_type: "authorization_code",
-    //       code: req.query.code,
-    //       redirect_uri: 'https://line-note2.herokuapp.com/callback',
-    //       client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
-    //       client_secret: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELSECRET,
-    //     }
-    //   }, (error, response, body) => {
-    //     if (response.statusCode != 200) {
-    //       res.send(error)
-    //       return
-    //     }
-    //     request
-    //       .get({
-    //         url: 'https://api.line.me/v2/profile',
-    //         headers: {
-    //           'Authorization': 'Bearer ' + JSON.parse(body).access_token
-    //         }
-    //       }, (error, response, body) => {
-    //         if (response.statusCode != 200) {
-    //           res.send(error)
-    //           return
-    //         }
-    //         res.render('pages/index')
-    //       })
-    //   })
+    request
+      .post({
+        url: `https://api.line.me/oauth2/v2.1/token`,
+        form: {
+          grant_type: "authorization_code",
+          code: req.query.code,
+          redirect_uri: 'https://line-login-kentaro.herokuapp.com/callback',
+          client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
+          client_secret: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELSECRET,
+        }
+      }, (error, response, body) => {
+        if (response.statusCode != 200) {
+          res.send(error)
+          return
+        }
+        request
+          .get({
+            url: 'https://api.line.me/v2/profile',
+            headers: {
+              'Authorization': 'Bearer ' + JSON.parse(body).access_token
+            }
+          }, (error, response, body) => {
+            if (response.statusCode != 200) {
+              res.send(error)
+              return
+            }
+            res.render('pages/index')
+          })
+      })
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
