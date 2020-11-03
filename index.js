@@ -31,7 +31,7 @@ express()
       response_type: 'code',
       client_id: process.env.LINECORP_PLATFORM_CHANNEL_CHANNELID,
       redirect_uri: 'https://line-login-kentaro.herokuapp.com/callback',
-      state: hoge, // TODO: must generate random string
+      state: 'hoge', // TODO: must generate random string
       scope: 'profile',
     })
     res.redirect(301, 'https://access.line.me/oauth2/v2.1/authorize?' + query)
