@@ -68,7 +68,8 @@ express()
               res.send(error)
               return
             }
-            res.render('pages/index')
+            res.send(body);
+            // res.render('pages/index')
           })
       })
   })
