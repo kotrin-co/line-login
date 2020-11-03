@@ -7,17 +7,17 @@ const request = require('request')
 
 var onetime_state_code;
 
-const state_code = () => {
-  const l = 8;
-  const c = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  const cl = c.length;
-  let r = '';
-  for(let i=0;i<l;i++){
-    r += c[Math.floor(Math.random()*cl)];
-  }
-  console.log('state_code:',r);
-  return r;
-}
+// const state_code = () => {
+//   const l = 8;
+//   const c = 'abcdefghijklmnopqrstuvwxyz0123456789';
+//   const cl = c.length;
+//   let r = '';
+//   for(let i=0;i<l;i++){
+//     r += c[Math.floor(Math.random()*cl)];
+//   }
+//   console.log('state_code:',r);
+//   return r;
+// }
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
