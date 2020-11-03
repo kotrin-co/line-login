@@ -37,6 +37,7 @@ express()
     res.redirect(301, 'https://access.line.me/oauth2/v2.1/authorize?' + query)
   })
   .get('/callback', (req, res) => {
+    console.log('req.query:',req.query);
     res.send('code:'+req.query.code);
     // const callback_state_code = req.query.state;
     // console.log('ワンタイムステート：',onetime_state_code);
